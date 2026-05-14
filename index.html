@@ -1,119 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Distribuidora Prime</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<script type="module" src="js/firebase.js"></script>
-<script type="module" src="js/app.js" defer></script>
+<script type="module" src="firebase.js"></script>
+
+<script type="module" src="app.js" defer></script>
 
 </head>
+
 <body>
 
 <header class="header">
 
-    <div class="logo">
-        🍺 <span>Distribuidora Prime</span>
-    </div>
+<div class="logo">
+🍺 Distribuidora <span>Prime</span>
+</div>
 
-    <nav>
+<nav>
 
-        <a href="#">Início</a>
-        <a href="#">Bebidas</a>
-        <a href="#">Combos</a>
-        <a href="#">Promoções</a>
+<a href="#">Início</a>
+<a href="#">Bebidas</a>
+<a href="#">Promoções</a>
+<a href="admin.html">Admin</a>
 
-    </nav>
-
-    <a href="admin.html" class="admin-btn">
-        Admin
-    </a>
+</nav>
 
 </header>
 
 <section class="hero">
 
-    <div class="hero-text">
+<div class="overlay"></div>
 
-        <h1>
-            AS MELHORES <br>
-            <span>BEBIDAS DA CIDADE!</span> 🚀
-        </h1>
+<div class="hero-content">
 
-        <p>
-            Entrega rápida e bebidas geladas na sua casa.
-        </p>
+<h1>
+AS MELHORES <br>
+<span>BEBIDAS DA CIDADE</span>
+</h1>
 
-        <button>
-            FAÇA SEU PEDIDO
-        </button>
+<p>
+Entrega rápida e bebidas sempre geladas 🚀
+</p>
 
-    </div>
+<button>
+FAÇA SEU PEDIDO
+</button>
+
+</div>
 
 </section>
 
 <section class="produtos">
 
-    <div class="titulo">
+<h2>🍾 Nosso Cardápio</h2>
 
-        <h2>🍾 NOSSO CARDÁPIO</h2>
-
-    </div>
-
-    <div id="lista-produtos" class="grid-produtos"></div>
+<div id="lista-produtos" class="grid-produtos"></div>
 
 </section>
 
-<section class="carrinho-area">
+<section class="carrinho-section">
 
-    <div class="carrinho">
+<div class="carrinho">
 
-        <h2>🛒 Seu Carrinho</h2>
+<h2>🛒 Seu Carrinho</h2>
 
-        <div id="carrinho-itens"></div>
+<div id="carrinho-itens"></div>
 
-        <div class="total-box">
+<h3 id="total">
+Total: R$ 0,00
+</h3>
 
-            <h3 id="total">
-                Total: R$ 0,00
-            </h3>
+<button id="finalizar">
 
-        </div>
+FINALIZAR PEDIDO
 
-        <button id="finalizar">
-            FINALIZAR PEDIDO
-        </button>
+</button>
 
-    </div>
+</div>
 
 </section>
 
 <footer>
 
-    <div>
+<h3>Distribuidora Prime</h3>
 
-        <h3>Distribuidora Prime</h3>
-
-        <p>
-            As melhores bebidas da cidade.
-        </p>
-
-    </div>
-
-    <div>
-
-        <h3>Contato</h3>
-
-        <p>(31) 99999-9999</p>
-
-    </div>
+<p>
+As melhores bebidas da cidade.
+</p>
 
 </footer>
 
