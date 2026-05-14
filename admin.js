@@ -1,11 +1,13 @@
 import { db } from './firebase.js';
 
 import {
+
 collection,
 addDoc,
 getDocs,
 deleteDoc,
 doc
+
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const salvar = document.getElementById("salvar");
@@ -33,12 +35,26 @@ salvar.addEventListener("click", async()=>{
         nome,
         preco,
         imagem
+
     });
 
-    alert("Produto salvo!");
+    alert("Produto cadastrado!");
+
+    limpar();
 
     carregarProdutos();
+
 });
+
+function limpar(){
+
+    document.getElementById("nome").value = "";
+
+    document.getElementById("preco").value = "";
+
+    document.getElementById("imagem").value = "";
+
+}
 
 async function carregarProdutos(){
 
@@ -62,9 +78,11 @@ async function carregarProdutos(){
 
                 <h3>${dados.nome}</h3>
 
-                <p>R$ ${dados.preco}</p>
+                <div class="preco">
+                    R$ ${dados.preco}
+                </div>
 
-                <button onclick="deletar('${produto.id}')">
+                <button onclick="deletarProduto('${produto.id}')">
 
                     Excluir
 
@@ -76,13 +94,15 @@ async function carregarProdutos(){
         
         `;
     });
+
 }
 
-window.deletar = async function(id){
+window.deletarProduto = async function(id){
 
     await deleteDoc(doc(db,"produtos",id));
 
     carregarProdutos();
+
 }
 
 carregarProdutos();

@@ -3,52 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Distribuidora Prime</title>
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/app.js" defer></script>
-</head>
 
+</head>
 <body>
 
-<header>
-    <h1>🍻 Distribuidora Prime</h1>
+<header class="header">
+
+    <div class="logo">
+        🍺 <span>Distribuidora Prime</span>
+    </div>
 
     <nav>
-        <a href="#produtos">Bebidas</a>
-        <a href="admin.html">Admin</a>
+
+        <a href="#">Início</a>
+        <a href="#">Bebidas</a>
+        <a href="#">Combos</a>
+        <a href="#">Promoções</a>
+
     </nav>
+
+    <a href="admin.html" class="admin-btn">
+        Admin
+    </a>
+
 </header>
 
 <section class="hero">
-    <h2>As melhores bebidas da cidade</h2>
-    <p>Entrega rápida 🚀</p>
-</section>
 
-<section id="produtos" class="produtos">
+    <div class="hero-text">
 
-    <h2>Nosso Cardápio</h2>
+        <h1>
+            AS MELHORES <br>
+            <span>BEBIDAS DA CIDADE!</span> 🚀
+        </h1>
 
-    <div id="lista-produtos" class="grid-produtos">
+        <p>
+            Entrega rápida e bebidas geladas na sua casa.
+        </p>
+
+        <button>
+            FAÇA SEU PEDIDO
+        </button>
+
     </div>
 
 </section>
 
-<section class="carrinho">
+<section class="produtos">
 
-    <h2>🛒 Carrinho</h2>
+    <div class="titulo">
 
-    <div id="carrinho-itens"></div>
+        <h2>🍾 NOSSO CARDÁPIO</h2>
 
-    <h3 id="total">Total: R$ 0,00</h3>
+    </div>
 
-    <button id="finalizar">
-        Finalizar Pedido
-    </button>
+    <div id="lista-produtos" class="grid-produtos"></div>
 
 </section>
+
+<section class="carrinho-area">
+
+    <div class="carrinho">
+
+        <h2>🛒 Seu Carrinho</h2>
+
+        <div id="carrinho-itens"></div>
+
+        <div class="total-box">
+
+            <h3 id="total">
+                Total: R$ 0,00
+            </h3>
+
+        </div>
+
+        <button id="finalizar">
+            FINALIZAR PEDIDO
+        </button>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <div>
+
+        <h3>Distribuidora Prime</h3>
+
+        <p>
+            As melhores bebidas da cidade.
+        </p>
+
+    </div>
+
+    <div>
+
+        <h3>Contato</h3>
+
+        <p>(31) 99999-9999</p>
+
+    </div>
+
+</footer>
 
 </body>
 </html>
