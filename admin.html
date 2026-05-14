@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Painel Admin</title>
+<title>Admin - Distribuidora Prime</title>
 
 <link rel="stylesheet" href="style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<script type="module" src="firebase.js"></script>
-<script type="module" src="admin.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
 
@@ -21,45 +20,53 @@
 
 <header class="header">
 
-    <div class="logo">
-        🍺 <span>Distribuidora Prime</span>
-    </div>
+<div class="logo">
 
-    <nav>
+🍺 DISTRIBUIDORA PRIME
 
-        <a href="index.html">Voltar ao Site</a>
+</div>
 
-    </nav>
+<nav>
+
+<a href="index.html">Voltar</a>
+
+</nav>
 
 </header>
 
-<section class="admin-page">
+<section class="pagina-topo">
 
-    <div class="admin-box">
+<h1>⚙ Painel Admin</h1>
 
-        <h1>⚙ Painel Administrativo</h1>
-
-        <input type="text" id="nome" placeholder="Nome da bebida">
-
-        <input type="number" id="preco" placeholder="Preço">
-
-        <input type="text" id="imagem" placeholder="URL da imagem">
-
-        <button id="salvar">
-
-            Salvar Produto
-
-        </button>
-
-    </div>
+<p>
+Gerencie os produtos da distribuidora.
+</p>
 
 </section>
 
-<section class="produtos-admin">
+<section class="produtos">
 
-    <h2>🍾 Produtos Cadastrados</h2>
+<div class="carrinho">
 
-    <div id="admin-lista" class="grid-produtos"></div>
+<input type="text" placeholder="Nome do produto">
+
+<br><br>
+
+<input type="text" placeholder="Preço">
+
+<br><br>
+
+<input type="text" placeholder="URL da imagem">
+
+<br><br>
+
+<button class="finalizar">
+
+Salvar Produto
+
+</button>
+
+</div>
 
 </section>
 

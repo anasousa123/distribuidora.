@@ -1,120 +1,134 @@
 import { db } from './firebase.js';
 
 import {
+
 collection,
 getDocs
+
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const lista = document.getElementById("lista-produtos");
-
-const carrinhoItens = document.getElementById("carrinho-itens");
-
-const totalHTML = document.getElementById("total");
+const listaProdutos = document.querySelector(".grid-produtos");
 
 let carrinho = [];
 
 async function carregarProdutos(){
 
-    const querySnapshot = await getDocs(
-        collection(db,"produtos")
-    );
+const querySnapshot = await getDocs(
+collection(db,"produtos")
+);
 
-    lista.innerHTML = "";
+listaProdutos.innerHTML = "";
 
-    querySnapshot.forEach((doc)=>{
+querySnapshot.forEach((doc)=>{
 
-        const produto = doc.data();
+const produto = doc.data();
 
-        lista.innerHTML += `
-        
-        <div class="card">
+listaProdutos.innerHTML += `
 
-            <img src="${produto.imagem}">
+<div class="card">
 
-            <div class="card-content">
+<img src="${produto.imagem}">
 
-                <h3>${produto.nome}</h3>
+<div class="card-content">
 
-                <div class="preco">
-                    R$ ${produto.preco}
-                </div>
+<h3>${produto.nome}</h3>
 
-                <button onclick="adicionarCarrinho('${produto.nome}',${produto.preco})">
+<div class="preco">
 
-                    Adicionar ao Carrinho
+R$ ${produto.preco}
 
-                </button>
+</div>
 
-            </div>
+<button onclick="adicionarCarrinho('${produto.nome}', ${produto.preco})">
 
-        </div>
-        
-        `;
-    });
+Adicionar
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
 
 }
 
 window.adicionarCarrinho = function(nome,preco){
 
-    carrinho.push({
-        nome,
-        preco
-    });
+carrinho.push({
 
-    atualizarCarrinho();
+nome,
+preco
+
+});
+
+atualizarCarrinho();
 
 }
 
 function atualizarCarrinho(){
 
-    carrinhoItens.innerHTML = "";
+const carrinhoHTML =
+document.getElementById("carrinho-itens");
 
-    let total = 0;
+const totalHTML =
+document.getElementById("total");
 
-    carrinho.forEach((item)=>{
+carrinhoHTML.innerHTML = "";
 
-        total += item.preco;
+let total = 0;
 
-        carrinhoItens.innerHTML += `
-        
-        <p>
-            ${item.nome} - R$ ${item.preco}
-        </p>
-        
-        `;
-    });
+carrinho.forEach((item)=>{
 
-    totalHTML.innerHTML = `
-    
-    Total: R$ ${total.toFixed(2)}
-    
-    `;
+total += item.preco;
+
+carrinhoHTML.innerHTML += `
+
+<p>
+
+${item.nome} - R$ ${item.preco}
+
+</p>
+
+`;
+
+});
+
+totalHTML.innerHTML = `
+
+Total: R$ ${total.toFixed(2)}
+
+`;
+
 }
 
 document.getElementById("finalizar")
 .addEventListener("click",()=>{
 
-    if(carrinho.length === 0){
+if(carrinho.length === 0){
 
-        alert("Carrinho vazio!");
-        return;
-    }
+alert("Carrinho vazio!");
+return;
 
-    let mensagem = "🍻 PEDIDO DISTRIBUIDORA PRIME %0A%0A";
+}
 
-    carrinho.forEach((item)=>{
+let mensagem = "🍺 PEDIDO DISTRIBUIDORA PRIME %0A%0A";
 
-        mensagem += `• ${item.nome} - R$ ${item.preco}%0A`;
+carrinho.forEach((item)=>{
 
-    });
+mensagem += `• ${item.nome} - R$ ${item.preco}%0A`;
 
-    window.open(
+});
+
+window.open(
 
 `https://wa.me/5531999999999?text=${mensagem}`,
 
 "_blank"
 
-    );
+);
 
 });
 

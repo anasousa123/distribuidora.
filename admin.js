@@ -10,98 +10,104 @@ doc
 
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const salvar = document.getElementById("salvar");
-
 const lista = document.getElementById("admin-lista");
+
+const salvar = document.getElementById("salvar");
 
 salvar.addEventListener("click", async()=>{
 
-    const nome = document.getElementById("nome").value;
+const nome =
+document.getElementById("nome").value;
 
-    const preco = Number(
-        document.getElementById("preco").value
-    );
+const preco = Number(
+document.getElementById("preco").value
+);
 
-    const imagem = document.getElementById("imagem").value;
+const imagem =
+document.getElementById("imagem").value;
 
-    if(!nome || !preco || !imagem){
+if(!nome || !preco || !imagem){
 
-        alert("Preencha tudo!");
-        return;
-    }
+alert("Preencha tudo!");
+return;
 
-    await addDoc(collection(db,"produtos"),{
+}
 
-        nome,
-        preco,
-        imagem
+await addDoc(collection(db,"produtos"),{
 
-    });
-
-    alert("Produto cadastrado!");
-
-    limpar();
-
-    carregarProdutos();
+nome,
+preco,
+imagem
 
 });
 
-function limpar(){
+alert("Produto cadastrado!");
 
-    document.getElementById("nome").value = "";
+limparCampos();
 
-    document.getElementById("preco").value = "";
+carregarProdutos();
 
-    document.getElementById("imagem").value = "";
+});
+
+function limparCampos(){
+
+document.getElementById("nome").value = "";
+
+document.getElementById("preco").value = "";
+
+document.getElementById("imagem").value = "";
 
 }
 
 async function carregarProdutos(){
 
-    lista.innerHTML = "";
+lista.innerHTML = "";
 
-    const querySnapshot = await getDocs(
-        collection(db,"produtos")
-    );
+const querySnapshot = await getDocs(
+collection(db,"produtos")
+);
 
-    querySnapshot.forEach((produto)=>{
+querySnapshot.forEach((produto)=>{
 
-        const dados = produto.data();
+const dados = produto.data();
 
-        lista.innerHTML += `
-        
-        <div class="card">
+lista.innerHTML += `
 
-            <img src="${dados.imagem}">
+<div class="card">
 
-            <div class="card-content">
+<img src="${dados.imagem}">
 
-                <h3>${dados.nome}</h3>
+<div class="card-content">
 
-                <div class="preco">
-                    R$ ${dados.preco}
-                </div>
+<h3>${dados.nome}</h3>
 
-                <button onclick="deletarProduto('${produto.id}')">
+<div class="preco">
 
-                    Excluir
+R$ ${dados.preco}
 
-                </button>
+</div>
 
-            </div>
+<button onclick="deletarProduto('${produto.id}')">
 
-        </div>
-        
-        `;
-    });
+Excluir
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
 
 }
 
 window.deletarProduto = async function(id){
 
-    await deleteDoc(doc(db,"produtos",id));
+await deleteDoc(doc(db,"produtos",id));
 
-    carregarProdutos();
+carregarProdutos();
 
 }
 
