@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel Admin</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/admin.js" defer></script>
+</head>
+
+<body>
+
+<header>
+    <h1>⚙ Painel Administrativo</h1>
+</header>
+
+<section class="admin">
+
+    <h2>Adicionar Produto</h2>
+
+    <input type="text" id="nome" placeholder="Nome">
+
+    <input type="number" id="preco" placeholder="Preço">
+
+    <input type="text" id="imagem" placeholder="URL da imagem">
+
+    <button id="salvar">
+        Salvar Produto
+    </button>
+
+</section>
+
+<section class="produtos-admin">
+
+    <h2>Produtos Cadastrados</h2>
+
+    <div id="admin-lista"></div>
+
+</section>
+
+</body>
+</html>
