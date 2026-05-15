@@ -1,135 +1,45 @@
-import { db } from './firebase.js';
+const finalizar =
+document.getElementById("finalizar");
 
-import {
+finalizar.addEventListener("click",()=>{
 
-collection,
-getDocs
+const itens =
+document.querySelectorAll("#carrinho-itens p");
 
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+const total =
+document.getElementById("total").innerText;
 
-const listaProdutos = document.querySelector(".grid-produtos");
-
-let carrinho = [];
-
-async function carregarProdutos(){
-
-const querySnapshot = await getDocs(
-collection(db,"produtos")
-);
-
-listaProdutos.innerHTML = "";
-
-querySnapshot.forEach((doc)=>{
-
-const produto = doc.data();
-
-listaProdutos.innerHTML += `
-
-<div class="card">
-
-<img src="${produto.imagem}">
-
-<div class="card-content">
-
-<h3>${produto.nome}</h3>
-
-<div class="preco">
-
-R$ ${produto.preco}
-
-</div>
-
-<button onclick="adicionarCarrinho('${produto.nome}', ${produto.preco})">
-
-Adicionar
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}
-
-window.adicionarCarrinho = function(nome,preco){
-
-carrinho.push({
-
-nome,
-preco
-
-});
-
-atualizarCarrinho();
-
-}
-
-function atualizarCarrinho(){
-
-const carrinhoHTML =
-document.getElementById("carrinho-itens");
-
-const totalHTML =
-document.getElementById("total");
-
-carrinhoHTML.innerHTML = "";
-
-let total = 0;
-
-carrinho.forEach((item)=>{
-
-total += item.preco;
-
-carrinhoHTML.innerHTML += `
-
-<p>
-
-${item.nome} - R$ ${item.preco}
-
-</p>
-
-`;
-
-});
-
-totalHTML.innerHTML = `
-
-Total: R$ ${total.toFixed(2)}
-
-`;
-
-}
-
-document.getElementById("finalizar")
-.addEventListener("click",()=>{
-
-if(carrinho.length === 0){
+if(itens.length === 0){
 
 alert("Carrinho vazio!");
 return;
 
 }
 
-let mensagem = "🍺 PEDIDO DISTRIBUIDORA PRIME %0A%0A";
+let mensagem =
+"🍺 *DISTRIBUIDORA PRIME* %0A%0A";
 
-carrinho.forEach((item)=>{
+mensagem += "🛒 *PEDIDO:* %0A";
 
-mensagem += `• ${item.nome} - R$ ${item.preco}%0A`;
+itens.forEach((item)=>{
+
+mensagem += "• " + item.innerText + "%0A";
 
 });
 
+mensagem += "%0A💰 *" + total + "*";
+
+mensagem += "%0A%0A🚀 Obrigado pela preferência!";
+
+const numero =
+"5534998307604";
+
 window.open(
 
-`https://wa.me/5531999999999?text=${mensagem}`,
+`https://wa.me/${numero}?text=${mensagem}`,
 
 "_blank"
 
 );
 
 });
-
-carregarProdutos();
