@@ -1,9 +1,5 @@
 let carrinho = [];
 
-let tipoEntrega = "retirada";
-
-let taxaEntrega = 0;
-
 const carrinhoHTML =
 document.getElementById("carrinho-itens");
 
@@ -12,79 +8,6 @@ document.getElementById("total");
 
 const finalizar =
 document.getElementById("finalizar");
-
-const btnEntrega =
-document.getElementById("btn-entrega");
-
-const btnRetirada =
-document.getElementById("btn-retirada");
-
-const enderecoBox =
-document.getElementById("endereco-box");
-
-const retiradaBox =
-document.getElementById("retirada-box");
-
-const bairro =
-document.getElementById("bairro");
-
-const taxaHTML =
-document.getElementById("taxa");
-
-/* ENTREGA */
-
-btnEntrega.addEventListener("click",()=>{
-
-tipoEntrega = "entrega";
-
-btnEntrega.classList.add("ativo");
-
-btnRetirada.classList.remove("ativo");
-
-enderecoBox.style.display = "block";
-
-retiradaBox.style.display = "none";
-
-});
-
-/* RETIRADA */
-
-btnRetirada.addEventListener("click",()=>{
-
-tipoEntrega = "retirada";
-
-taxaEntrega = 0;
-
-btnRetirada.classList.add("ativo");
-
-btnEntrega.classList.remove("ativo");
-
-enderecoBox.style.display = "none";
-
-retiradaBox.style.display = "block";
-
-taxaHTML.innerHTML =
-"🚚 Taxa de entrega: R$ 0,00";
-
-atualizarCarrinho();
-
-});
-
-/* TAXA */
-
-bairro.addEventListener("change",()=>{
-
-taxaEntrega =
-Number(bairro.value);
-
-taxaHTML.innerHTML =
-
-`🚚 Taxa de entrega:
-R$ ${taxaEntrega.toFixed(2)}`;
-
-atualizarCarrinho();
-
-});
 
 /* ADICIONAR */
 
@@ -137,7 +60,7 @@ function atualizarCarrinho(){
 
 carrinhoHTML.innerHTML = "";
 
-let subtotal = 0;
+let total = 0;
 
 if(carrinho.length === 0){
 
@@ -160,10 +83,10 @@ return;
 
 carrinho.forEach((item,index)=>{
 
-const totalItem =
+const subtotal =
 item.preco * item.quantidade;
 
-subtotal += totalItem;
+total += subtotal;
 
 carrinhoHTML.innerHTML += `
 
@@ -176,7 +99,7 @@ carrinhoHTML.innerHTML += `
 <p>
 
 ${item.quantidade}x •
-R$ ${totalItem.toFixed(2)}
+R$ ${subtotal.toFixed(2)}
 
 </p>
 
@@ -194,14 +117,11 @@ R$ ${totalItem.toFixed(2)}
 
 });
 
-const totalFinal =
-subtotal + taxaEntrega;
-
 totalHTML.innerHTML =
 
 `
-💰 Total Final:
-R$ ${totalFinal.toFixed(2)}
+💰 Total:
+R$ ${total.toFixed(2)}
 `;
 
 }
@@ -210,6 +130,16 @@ R$ ${totalFinal.toFixed(2)}
 
 finalizar.addEventListener("click",()=>{
 
+const cliente =
+document.getElementById("cliente").value;
+
+if(cliente === ""){
+
+alert("Digite seu nome!");
+return;
+
+}
+
 if(carrinho.length === 0){
 
 alert("Carrinho vazio!");
@@ -217,35 +147,35 @@ return;
 
 }
 
-let subtotal = 0;
+let total = 0;
 
 let mensagem =
 "🍺 *DISTRIBUIDORA PRIME* %0A%0A";
+
+mensagem +=
+`👤 Cliente: ${cliente}%0A%0A`;
 
 mensagem +=
 "🛒 *PEDIDO:* %0A%0A";
 
 carrinho.forEach((item)=>{
 
-const totalItem =
+const subtotal =
 item.preco * item.quantidade;
 
-subtotal += totalItem;
+total += subtotal;
 
 mensagem +=
 
 `• ${item.nome}
 (${item.quantidade}x)
-- R$ ${totalItem.toFixed(2)}%0A`;
+- R$ ${subtotal.toFixed(2)}%0A`;
 
 });
 
-const totalFinal =
-subtotal + taxaEntrega;
-
 mensagem +=
 
-`%0A💰 *Total Final: R$ ${totalFinal.toFixed(2)}*`;
+`%0A💰 *Total: R$ ${total.toFixed(2)}*`;
 
 window.open(
 
