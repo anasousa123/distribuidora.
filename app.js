@@ -1,45 +1,142 @@
+const carrinho = [];
+
+const carrinhoHTML =
+document.getElementById("carrinho-itens");
+
+const totalHTML =
+document.getElementById("total");
+
 const finalizar =
 document.getElementById("finalizar");
 
+/* ADICIONAR PRODUTO */
+
+window.adicionarCarrinho = function(nome,preco){
+
+carrinho.push({
+nome,
+preco
+});
+
+atualizarCarrinho();
+
+}
+
+/* REMOVER PRODUTO */
+
+window.removerItem = function(index){
+
+carrinho.splice(index,1);
+
+atualizarCarrinho();
+
+}
+
+/* ATUALIZAR CARRINHO */
+
+function atualizarCarrinho(){
+
+carrinhoHTML.innerHTML = "";
+
+let total = 0;
+
+if(carrinho.length === 0){
+
+carrinhoHTML.innerHTML = `
+
+<p class="vazio">
+
+Seu carrinho está vazio 🛒
+
+</p>
+
+`;
+
+totalHTML.innerHTML =
+"Total: R$ 0,00";
+
+return;
+
+}
+
+carrinho.forEach((item,index)=>{
+
+total += item.preco;
+
+carrinhoHTML.innerHTML += `
+
+<div class="item-carrinho">
+
+<div>
+
+<h4>${item.nome}</h4>
+
+<p>R$ ${item.preco.toFixed(2)}</p>
+
+</div>
+
+<button onclick="removerItem(${index})">
+
+❌
+
+</button>
+
+</div>
+
+`;
+
+});
+
+totalHTML.innerHTML =
+
+`Total: R$ ${total.toFixed(2)}`;
+
+}
+
+/* FINALIZAR PEDIDO */
+
 finalizar.addEventListener("click",()=>{
 
-const itens =
-document.querySelectorAll("#carrinho-itens p");
-
-const total =
-document.getElementById("total").innerText;
-
-if(itens.length === 0){
+if(carrinho.length === 0){
 
 alert("Carrinho vazio!");
 return;
 
 }
 
+let total = 0;
+
 let mensagem =
 "🍺 *DISTRIBUIDORA PRIME* %0A%0A";
 
 mensagem += "🛒 *PEDIDO:* %0A";
 
-itens.forEach((item)=>{
+carrinho.forEach((item)=>{
 
-mensagem += "• " + item.innerText + "%0A";
+total += item.preco;
+
+mensagem +=
+`• ${item.nome} - R$ ${item.preco.toFixed(2)}%0A`;
 
 });
 
-mensagem += "%0A💰 *" + total + "*";
+mensagem +=
 
-mensagem += "%0A%0A🚀 Obrigado pela preferência!";
+`%0A💰 *Total: R$ ${total.toFixed(2)}*`;
 
-const numero =
-"5534998307604";
+mensagem +=
+"%0A%0A🚀 Obrigado pela preferência!";
 
 window.open(
 
-`https://wa.me/${numero}?text=${mensagem}`,
+`https://wa.me/5531999999999?text=${mensagem}`,
 
 "_blank"
 
 );
 
 });
+
+/* INICIAR */
+
+atualizarCarrinho();

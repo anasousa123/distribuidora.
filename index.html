@@ -88,6 +88,8 @@ FAÇA SEU PEDIDO
 
 <div class="grid-produtos">
 
+<!-- PRODUTO 1 -->
+
 <div class="card">
 
 <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?q=80&w=800">
@@ -102,7 +104,7 @@ R$ 8,00
 
 </div>
 
-<button>
+<button onclick="adicionarCarrinho('Heineken 330ml',8)">
 
 Adicionar
 
@@ -111,6 +113,8 @@ Adicionar
 </div>
 
 </div>
+
+<!-- PRODUTO 2 -->
 
 <div class="card">
 
@@ -126,7 +130,7 @@ R$ 7,50
 
 </div>
 
-<button>
+<button onclick="adicionarCarrinho('Corona 330ml',7.5)">
 
 Adicionar
 
@@ -135,6 +139,8 @@ Adicionar
 </div>
 
 </div>
+
+<!-- PRODUTO 3 -->
 
 <div class="card">
 
@@ -150,7 +156,7 @@ R$ 6,50
 
 </div>
 
-<button>
+<button onclick="adicionarCarrinho('Budweiser',6.5)">
 
 Adicionar
 
@@ -159,6 +165,8 @@ Adicionar
 </div>
 
 </div>
+
+<!-- PRODUTO 4 -->
 
 <div class="card">
 
@@ -174,7 +182,7 @@ R$ 120,00
 
 </div>
 
-<button>
+<button onclick="adicionarCarrinho('Jack Daniels',120)">
 
 Adicionar
 
@@ -198,17 +206,29 @@ Adicionar
 
 </h2>
 
-<p>Heineken - R$ 8,00</p>
+<!-- ITENS -->
 
-<p>Corona - R$ 7,50</p>
+<div id="carrinho-itens">
 
-<h3>
+<p class="vazio">
 
-Total: R$ 15,50
+Seu carrinho está vazio 🛒
+
+</p>
+
+</div>
+
+<!-- TOTAL -->
+
+<h3 id="total">
+
+Total: R$ 0,00
 
 </h3>
 
-<button class="finalizar">
+<!-- BOTÃO -->
+
+<button id="finalizar" class="finalizar">
 
 FINALIZAR PEDIDO
 
@@ -241,6 +261,10 @@ As melhores bebidas da cidade.
 </div>
 
 </footer>
+
+<!-- JS -->
+
+<script src="app.js"></script>
 
 </body>
 </html>
