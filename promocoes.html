@@ -18,11 +18,34 @@
 
 <body>
 
+<!-- LOADING -->
+
+<div id="loading">
+
+<div class="loader"></div>
+
+<h2>Distribuidora Prime</h2>
+
+</div>
+
+<!-- WHATSAPP -->
+
+<a
+href="https://wa.me/5531999999999"
+class="whatsapp"
+target="_blank">
+
+💬
+
+</a>
+
+<!-- HEADER -->
+
 <header class="header">
 
 <div class="logo">
 
-🍺 DISTRIBUIDORA PRIME
+🍺 PRIME
 
 </div>
 
@@ -37,28 +60,48 @@
 <a href="promocoes.html">Promoções</a>
 
 <a href="admin.html" class="admin-btn">
+
 Admin
+
 </a>
 
 </nav>
 
 </header>
 
-<section class="pagina-topo">
+<!-- TOPO -->
 
-<h1>💥 Promoções</h1>
+<section class="pagina-topo fade-up">
+
+<h1>
+
+💥 Promoções
+
+</h1>
 
 <p>
+
 As melhores ofertas da semana.
+
 </p>
 
 </section>
+
+<!-- PRODUTOS -->
 
 <section class="produtos">
 
 <div class="grid-produtos">
 
-<div class="card">
+<!-- PRODUTO 1 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+-30%
+
+</div>
 
 <img src="https://images.unsplash.com/photo-1571767454098-246b94fbcf70?q=80&w=800">
 
@@ -66,19 +109,37 @@ As melhores ofertas da semana.
 
 <h3>Skol 350ml</h3>
 
+<p>
+
+Promoção especial da semana
+
+</p>
+
 <div class="preco">
 
 R$ 4,50
 
 </div>
 
-<button>Adicionar</button>
+<button onclick="adicionarCarrinho('Skol 350ml',4.5)">
+
+Adicionar
+
+</button>
 
 </div>
 
 </div>
 
-<div class="card">
+<!-- PRODUTO 2 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+OFERTA
+
+</div>
 
 <img src="https://images.unsplash.com/photo-1629203851122-3726ecdf080e?q=80&w=800">
 
@@ -86,13 +147,99 @@ R$ 4,50
 
 <h3>Red Bull</h3>
 
+<p>
+
+Energético gelado premium
+
+</p>
+
 <div class="preco">
 
 R$ 10,00
 
 </div>
 
-<button>Adicionar</button>
+<button onclick="adicionarCarrinho('Red Bull',10)">
+
+Adicionar
+
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUTO 3 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+TOP
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800">
+
+<div class="card-content">
+
+<h3>Combo Cerveja</h3>
+
+<p>
+
+12 cervejas com desconto
+
+</p>
+
+<div class="preco">
+
+R$ 79,90
+
+</div>
+
+<button onclick="adicionarCarrinho('Combo Cerveja',79.9)">
+
+Adicionar
+
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUTO 4 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+🔥 HOT
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1560847468-5eef330f4554?q=80&w=800">
+
+<div class="card-content">
+
+<h3>Vodka + Energético</h3>
+
+<p>
+
+Combo premium festa
+
+</p>
+
+<div class="preco">
+
+R$ 99,90
+
+</div>
+
+<button onclick="adicionarCarrinho('Vodka + Energético',99.9)">
+
+Adicionar
+
+</button>
 
 </div>
 
@@ -101,6 +248,74 @@ R$ 10,00
 </div>
 
 </section>
+
+<!-- CARRINHO -->
+
+<section class="carrinho-area">
+
+<div class="carrinho fade-up">
+
+<h2>
+
+🛒 Seu Carrinho
+
+</h2>
+
+<div id="carrinho-itens">
+
+<p class="vazio">
+
+Seu carrinho está vazio 🛒
+
+</p>
+
+</div>
+
+<h3 id="total">
+
+Total: R$ 0,00
+
+</h3>
+
+<button id="finalizar" class="finalizar">
+
+FINALIZAR PEDIDO
+
+</button>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div>
+
+<h3>Distribuidora Prime</h3>
+
+<p>
+
+As melhores bebidas da cidade.
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Contato</h3>
+
+<p>(31) 99999-9999</p>
+
+<p>@distribuidoraprime</p>
+
+</div>
+
+</footer>
+
+<script src="app.js"></script>
 
 </body>
 </html>

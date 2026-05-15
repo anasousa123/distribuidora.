@@ -18,11 +18,34 @@
 
 <body>
 
+<!-- LOADING -->
+
+<div id="loading">
+
+<div class="loader"></div>
+
+<h2>Distribuidora Prime</h2>
+
+</div>
+
+<!-- WHATSAPP -->
+
+<a
+href="https://wa.me/5531999999999"
+class="whatsapp"
+target="_blank">
+
+💬
+
+</a>
+
+<!-- HEADER -->
+
 <header class="header">
 
 <div class="logo">
 
-🍺 DISTRIBUIDORA PRIME
+🍺 PRIME
 
 </div>
 
@@ -37,28 +60,48 @@
 <a href="promocoes.html">Promoções</a>
 
 <a href="admin.html" class="admin-btn">
+
 Admin
+
 </a>
 
 </nav>
 
 </header>
 
-<section class="pagina-topo">
+<!-- TOPO -->
 
-<h1>🔥 Combos Especiais</h1>
+<section class="pagina-topo fade-up">
+
+<h1>
+
+🔥 Combos Especiais
+
+</h1>
 
 <p>
+
 Os melhores combos com desconto.
+
 </p>
 
 </section>
+
+<!-- PRODUTOS -->
 
 <section class="produtos">
 
 <div class="grid-produtos">
 
-<div class="card">
+<!-- COMBO 1 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+OFERTA
+
+</div>
 
 <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800">
 
@@ -66,19 +109,37 @@ Os melhores combos com desconto.
 
 <h3>Combo Heineken</h3>
 
+<p>
+
+6 Heinekens + gelo grátis
+
+</p>
+
 <div class="preco">
 
 R$ 45,00
 
 </div>
 
-<button>Adicionar</button>
+<button onclick="adicionarCarrinho('Combo Heineken',45)">
+
+Adicionar
+
+</button>
 
 </div>
 
 </div>
 
-<div class="card">
+<!-- COMBO 2 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+PREMIUM
+
+</div>
 
 <img src="https://images.unsplash.com/photo-1609951651556-5334e2706168?q=80&w=800">
 
@@ -86,13 +147,99 @@ R$ 45,00
 
 <h3>Combo Whisky</h3>
 
+<p>
+
+Whisky + energético + gelo
+
+</p>
+
 <div class="preco">
 
 R$ 120,00
 
 </div>
 
-<button>Adicionar</button>
+<button onclick="adicionarCarrinho('Combo Whisky',120)">
+
+Adicionar
+
+</button>
+
+</div>
+
+</div>
+
+<!-- COMBO 3 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+TOP
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1560847468-5eef330f4554?q=80&w=800">
+
+<div class="card-content">
+
+<h3>Combo Festa</h3>
+
+<p>
+
+24 cervejas + refrigerante
+
+</p>
+
+<div class="preco">
+
+R$ 199,00
+
+</div>
+
+<button onclick="adicionarCarrinho('Combo Festa',199)">
+
+Adicionar
+
+</button>
+
+</div>
+
+</div>
+
+<!-- COMBO 4 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+PROMO
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=800">
+
+<div class="card-content">
+
+<h3>Combo Vodka</h3>
+
+<p>
+
+Vodka + energético tropical
+
+</p>
+
+<div class="preco">
+
+R$ 89,90
+
+</div>
+
+<button onclick="adicionarCarrinho('Combo Vodka',89.9)">
+
+Adicionar
+
+</button>
 
 </div>
 
@@ -101,6 +248,74 @@ R$ 120,00
 </div>
 
 </section>
+
+<!-- CARRINHO -->
+
+<section class="carrinho-area">
+
+<div class="carrinho fade-up">
+
+<h2>
+
+🛒 Seu Carrinho
+
+</h2>
+
+<div id="carrinho-itens">
+
+<p class="vazio">
+
+Seu carrinho está vazio 🛒
+
+</p>
+
+</div>
+
+<h3 id="total">
+
+Total: R$ 0,00
+
+</h3>
+
+<button id="finalizar" class="finalizar">
+
+FINALIZAR PEDIDO
+
+</button>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div>
+
+<h3>Distribuidora Prime</h3>
+
+<p>
+
+As melhores bebidas da cidade.
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Contato</h3>
+
+<p>(31) 99999-9999</p>
+
+<p>@distribuidoraprime</p>
+
+</div>
+
+</footer>
+
+<script src="app.js"></script>
 
 </body>
 </html>

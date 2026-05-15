@@ -1,4 +1,8 @@
-const carrinho = [];
+let carrinho = JSON.parse(
+localStorage.getItem("carrinho")
+) || [];
+
+/* ELEMENTOS */
 
 const carrinhoHTML =
 document.getElementById("carrinho-itens");
@@ -9,36 +13,107 @@ document.getElementById("total");
 const finalizar =
 document.getElementById("finalizar");
 
-/* ADICIONAR PRODUTO */
+/* ADICIONAR */
 
 window.adicionarCarrinho = function(nome,preco){
 
+const itemExistente =
+carrinho.find(item => item.nome === nome);
+
+if(itemExistente){
+
+itemExistente.quantidade++;
+
+}else{
+
 carrinho.push({
+
 nome,
-preco
+preco,
+quantidade:1
+
 });
+
+}
+
+/* SOM */
+
+const audio = new Audio(
+"https://www.soundjay.com/buttons/sounds/button-3.mp3"
+);
+
+audio.play();
+
+salvarCarrinho();
 
 atualizarCarrinho();
 
 }
 
-/* REMOVER PRODUTO */
+/* REMOVER */
 
 window.removerItem = function(index){
 
+if(carrinho[index].quantidade > 1){
+
+carrinho[index].quantidade--;
+
+}else{
+
 carrinho.splice(index,1);
+
+}
+
+salvarCarrinho();
 
 atualizarCarrinho();
 
 }
 
-/* ATUALIZAR CARRINHO */
+/* LIMPAR */
+
+window.limparCarrinho = function(){
+
+const confirmar =
+confirm("Deseja limpar o carrinho?");
+
+if(!confirmar){
+
+return;
+
+}
+
+carrinho = [];
+
+salvarCarrinho();
+
+atualizarCarrinho();
+
+}
+
+/* SALVAR */
+
+function salvarCarrinho(){
+
+localStorage.setItem(
+
+"carrinho",
+
+JSON.stringify(carrinho)
+
+);
+
+}
+
+/* ATUALIZAR */
 
 function atualizarCarrinho(){
 
 carrinhoHTML.innerHTML = "";
 
 let total = 0;
+
+/* VAZIO */
 
 if(carrinho.length === 0){
 
@@ -59,27 +134,43 @@ return;
 
 }
 
+/* ITENS */
+
 carrinho.forEach((item,index)=>{
 
-total += item.preco;
+const subtotal =
+item.preco * item.quantidade;
+
+total += subtotal;
 
 carrinhoHTML.innerHTML += `
 
-<div class="item-carrinho">
+<div class="item-carrinho fade-up">
 
 <div>
 
 <h4>${item.nome}</h4>
 
-<p>R$ ${item.preco.toFixed(2)}</p>
+<p>
+
+${item.quantidade}x •
+R$ ${subtotal.toFixed(2)}
+
+</p>
 
 </div>
 
-<button onclick="removerItem(${index})">
+<div class="acoes">
 
-❌
+<button
+class="menos"
+onclick="removerItem(${index})">
+
+➖
 
 </button>
+
+</div>
 
 </div>
 
@@ -87,13 +178,29 @@ carrinhoHTML.innerHTML += `
 
 });
 
+/* TOTAL */
+
 totalHTML.innerHTML =
 
-`Total: R$ ${total.toFixed(2)}`;
+`💰 Total: R$ ${total.toFixed(2)}`;
+
+/* BOTÃO LIMPAR */
+
+carrinhoHTML.innerHTML += `
+
+<button
+class="limpar-btn"
+onclick="limparCarrinho()">
+
+🗑 Limpar Carrinho
+
+</button>
+
+`;
 
 }
 
-/* FINALIZAR PEDIDO */
+/* FINALIZAR */
 
 finalizar.addEventListener("click",()=>{
 
@@ -104,19 +211,28 @@ return;
 
 }
 
+finalizar.innerHTML =
+"Enviando...";
+
 let total = 0;
 
 let mensagem =
 "🍺 *DISTRIBUIDORA PRIME* %0A%0A";
 
-mensagem += "🛒 *PEDIDO:* %0A";
+mensagem +=
+"🛒 *PEDIDO:* %0A%0A";
 
 carrinho.forEach((item)=>{
 
-total += item.preco;
+const subtotal =
+item.preco * item.quantidade;
+
+total += subtotal;
 
 mensagem +=
-`• ${item.nome} - R$ ${item.preco.toFixed(2)}%0A`;
+
+`• ${item.nome} (${item.quantidade}x)
+- R$ ${subtotal.toFixed(2)}%0A`;
 
 });
 
@@ -127,6 +243,8 @@ mensagem +=
 mensagem +=
 "%0A%0A🚀 Obrigado pela preferência!";
 
+/* WHATSAPP */
+
 window.open(
 
 `https://wa.me/5531999999999?text=${mensagem}`,
@@ -135,13 +253,18 @@ window.open(
 
 );
 
+/* RESET */
+
+setTimeout(()=>{
+
+finalizar.innerHTML =
+"FINALIZAR PEDIDO";
+
+},1500);
+
 });
 
-/* INICIAR */
-
-atualizarCarrinho();
-
-/* BOTÃO HERO */
+/* HERO */
 
 window.irParaCardapio = function(){
 
@@ -153,3 +276,26 @@ behavior:"smooth"
 });
 
 }
+
+/* LOADING */
+
+window.addEventListener("load",()=>{
+
+const loading =
+document.getElementById("loading");
+
+if(loading){
+
+setTimeout(()=>{
+
+loading.style.display = "none";
+
+},1200);
+
+}
+
+});
+
+/* INICIAR */
+
+atualizarCarrinho();

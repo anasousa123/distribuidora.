@@ -10,28 +10,47 @@ doc
 
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const lista = document.getElementById("admin-lista");
+/* ELEMENTOS */
 
-const salvar = document.getElementById("salvar");
+const lista =
+document.getElementById("admin-lista");
+
+const salvar =
+document.getElementById("salvar");
+
+const nomeInput =
+document.getElementById("nome");
+
+const precoInput =
+document.getElementById("preco");
+
+const imagemInput =
+document.getElementById("imagem");
+
+/* SALVAR PRODUTO */
 
 salvar.addEventListener("click", async()=>{
 
-const nome =
-document.getElementById("nome").value;
+const nome = nomeInput.value;
 
-const preco = Number(
-document.getElementById("preco").value
-);
+const preco = Number(precoInput.value);
 
-const imagem =
-document.getElementById("imagem").value;
+const imagem = imagemInput.value;
+
+/* VALIDAÇÃO */
 
 if(!nome || !preco || !imagem){
 
-alert("Preencha tudo!");
+alert("Preencha todos os campos!");
 return;
 
 }
+
+/* LOADING */
+
+salvar.innerHTML = "Salvando...";
+
+try{
 
 await addDoc(collection(db,"produtos"),{
 
@@ -41,31 +60,48 @@ imagem
 
 });
 
-alert("Produto cadastrado!");
+alert("✅ Produto cadastrado!");
 
 limparCampos();
 
 carregarProdutos();
 
+}catch(error){
+
+alert("Erro ao salvar produto!");
+
+console.log(error);
+
+}
+
+/* VOLTAR BOTÃO */
+
+salvar.innerHTML = "Salvar Produto";
+
 });
+
+/* LIMPAR */
 
 function limparCampos(){
 
-document.getElementById("nome").value = "";
+nomeInput.value = "";
 
-document.getElementById("preco").value = "";
+precoInput.value = "";
 
-document.getElementById("imagem").value = "";
+imagemInput.value = "";
 
 }
+
+/* CARREGAR PRODUTOS */
 
 async function carregarProdutos(){
 
 lista.innerHTML = "";
 
-const querySnapshot = await getDocs(
-collection(db,"produtos")
-);
+/* BUSCAR FIREBASE */
+
+const querySnapshot =
+await getDocs(collection(db,"produtos"));
 
 querySnapshot.forEach((produto)=>{
 
@@ -73,7 +109,7 @@ const dados = produto.data();
 
 lista.innerHTML += `
 
-<div class="card">
+<div class="card fade-up">
 
 <img src="${dados.imagem}">
 
@@ -87,11 +123,17 @@ R$ ${dados.preco}
 
 </div>
 
-<button onclick="deletarProduto('${produto.id}')">
+<div class="admin-buttons">
+
+<button
+class="delete-btn"
+onclick="deletarProduto('${produto.id}')">
 
 Excluir
 
 </button>
+
+</div>
 
 </div>
 
@@ -103,12 +145,27 @@ Excluir
 
 }
 
+/* EXCLUIR */
+
 window.deletarProduto = async function(id){
 
+const confirmar =
+confirm("Deseja excluir este produto?");
+
+if(!confirmar){
+
+return;
+
+}
+
 await deleteDoc(doc(db,"produtos",id));
+
+alert("🗑 Produto removido!");
 
 carregarProdutos();
 
 }
+
+/* INICIAR */
 
 carregarProdutos();

@@ -6,6 +6,8 @@ getFirestore
 
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+/* CONFIG FIREBASE */
+
 const firebaseConfig = {
 
 apiKey: "SUA_API_KEY",
@@ -22,8 +24,14 @@ appId: "SEU_APP_ID"
 
 };
 
+/* INICIAR FIREBASE */
+
 const app = initializeApp(firebaseConfig);
 
+/* BANCO */
+
 const db = getFirestore(app);
+
+/* EXPORTAR */
 
 export { db };

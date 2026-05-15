@@ -18,11 +18,34 @@
 
 <body>
 
+<!-- LOADING -->
+
+<div id="loading">
+
+<div class="loader"></div>
+
+<h2>Distribuidora Prime</h2>
+
+</div>
+
+<!-- WHATSAPP -->
+
+<a
+href="https://wa.me/5531999999999"
+class="whatsapp"
+target="_blank">
+
+💬
+
+</a>
+
+<!-- HEADER -->
+
 <header class="header">
 
 <div class="logo">
 
-🍺 DISTRIBUIDORA PRIME
+🍺 PRIME
 
 </div>
 
@@ -37,28 +60,70 @@
 <a href="promocoes.html">Promoções</a>
 
 <a href="admin.html" class="admin-btn">
+
 Admin
+
 </a>
 
 </nav>
 
 </header>
 
-<section class="pagina-topo">
+<!-- TOPO -->
 
-<h1>🍾 Nossas Bebidas</h1>
+<section class="pagina-topo fade-up">
+
+<h1>
+
+🍾 Nossas Bebidas
+
+</h1>
 
 <p>
+
 As bebidas mais geladas da cidade.
+
 </p>
 
 </section>
+
+<!-- CATEGORIAS -->
+
+<section class="categorias">
+
+<div class="categoria">
+🍺 Cervejas
+</div>
+
+<div class="categoria">
+🥃 Whisky
+</div>
+
+<div class="categoria">
+⚡ Energéticos
+</div>
+
+<div class="categoria">
+🍹 Drinks
+</div>
+
+</section>
+
+<!-- PRODUTOS -->
 
 <section class="produtos">
 
 <div class="grid-produtos">
 
-<div class="card">
+<!-- PRODUTO 1 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+PROMO
+
+</div>
 
 <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?q=80&w=800">
 
@@ -72,13 +137,25 @@ R$ 8,00
 
 </div>
 
-<button>Adicionar</button>
+<button onclick="adicionarCarrinho('Heineken',8)">
+
+Adicionar
+
+</button>
 
 </div>
 
 </div>
 
-<div class="card">
+<!-- PRODUTO 2 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+TOP
+
+</div>
 
 <img src="https://images.unsplash.com/photo-1566633806327-68e152aaf26d?q=80&w=800">
 
@@ -92,13 +169,25 @@ R$ 7,50
 
 </div>
 
-<button>Adicionar</button>
+<button onclick="adicionarCarrinho('Corona',7.5)">
+
+Adicionar
+
+</button>
 
 </div>
 
 </div>
 
-<div class="card">
+<!-- PRODUTO 3 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+OFERTA
+
+</div>
 
 <img src="https://images.unsplash.com/photo-1584225064785-c62a8b43d148?q=80&w=800">
 
@@ -112,7 +201,43 @@ R$ 6,50
 
 </div>
 
-<button>Adicionar</button>
+<button onclick="adicionarCarrinho('Budweiser',6.5)">
+
+Adicionar
+
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUTO 4 -->
+
+<div class="card fade-up">
+
+<div class="tag">
+
+PREMIUM
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=800">
+
+<div class="card-content">
+
+<h3>Jack Daniels</h3>
+
+<div class="preco">
+
+R$ 120,00
+
+</div>
+
+<button onclick="adicionarCarrinho('Jack Daniels',120)">
+
+Adicionar
+
+</button>
 
 </div>
 
@@ -121,6 +246,74 @@ R$ 6,50
 </div>
 
 </section>
+
+<!-- CARRINHO -->
+
+<section class="carrinho-area">
+
+<div class="carrinho fade-up">
+
+<h2>
+
+🛒 Seu Carrinho
+
+</h2>
+
+<div id="carrinho-itens">
+
+<p class="vazio">
+
+Seu carrinho está vazio 🛒
+
+</p>
+
+</div>
+
+<h3 id="total">
+
+Total: R$ 0,00
+
+</h3>
+
+<button id="finalizar" class="finalizar">
+
+FINALIZAR PEDIDO
+
+</button>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div>
+
+<h3>Distribuidora Prime</h3>
+
+<p>
+
+As melhores bebidas da cidade.
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Contato</h3>
+
+<p>(31) 99999-9999</p>
+
+<p>@distribuidoraprime</p>
+
+</div>
+
+</footer>
+
+<script src="app.js"></script>
 
 </body>
 </html>

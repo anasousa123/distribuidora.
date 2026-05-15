@@ -18,49 +18,82 @@
 
 <body>
 
+<!-- HEADER -->
+
 <header class="header">
 
 <div class="logo">
 
-🍺 DISTRIBUIDORA PRIME
+🍺 PRIME ADMIN
 
 </div>
 
 <nav>
 
-<a href="index.html">Voltar</a>
+<a href="index.html">
+
+Voltar ao Site
+
+</a>
+
+<a href="pedidos.html" class="admin-btn">
+
+Pedidos
+
+</a>
 
 </nav>
 
 </header>
 
+<!-- TOPO -->
+
 <section class="pagina-topo">
 
-<h1>⚙ Painel Admin</h1>
+<h1>
+
+⚙ Painel Administrativo
+
+</h1>
 
 <p>
-Gerencie os produtos da distribuidora.
+
+Gerencie produtos, pedidos e promoções.
+
 </p>
 
 </section>
 
-<section class="produtos">
+<!-- FORMULÁRIO -->
 
-<div class="carrinho">
+<section class="admin-area">
 
-<input type="text" placeholder="Nome do produto">
+<div class="admin-box fade-up">
 
-<br><br>
+<h2>
 
-<input type="text" placeholder="Preço">
+➕ Adicionar Produto
 
-<br><br>
+</h2>
 
-<input type="text" placeholder="URL da imagem">
+<input
+type="text"
+id="nome"
+placeholder="Nome do produto">
 
-<br><br>
+<input
+type="number"
+id="preco"
+placeholder="Preço">
 
-<button class="finalizar">
+<input
+type="text"
+id="imagem"
+placeholder="URL da imagem">
+
+<button
+id="salvar"
+class="finalizar">
 
 Salvar Produto
 
@@ -69,6 +102,28 @@ Salvar Produto
 </div>
 
 </section>
+
+<!-- LISTA -->
+
+<section class="produtos">
+
+<h2 class="admin-title">
+
+📦 Produtos Cadastrados
+
+</h2>
+
+<div
+id="admin-lista"
+class="grid-produtos">
+
+</div>
+
+</section>
+
+<!-- JS -->
+
+<script type="module" src="admin.js"></script>
 
 </body>
 </html>
