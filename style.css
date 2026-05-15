@@ -366,3 +366,7 @@ padding:30px;
 color:#999;
 
 }
+
+html{
+
+scroll-behavior:smooth;

@@ -140,3 +140,16 @@ window.open(
 /* INICIAR */
 
 atualizarCarrinho();
+
+/* BOTÃO HERO */
+
+window.irParaCardapio = function(){
+
+document.querySelector(".produtos")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+}
