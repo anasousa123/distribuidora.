@@ -1,10 +1,8 @@
 /* =========================
-CARRINHO DISTRIBUIDORA PRIME
+CARRINHO
 ========================= */
 
 let carrinho = [];
-
-/* ELEMENTOS */
 
 const carrinhoHTML =
 document.getElementById("carrinho-itens");
@@ -33,19 +31,26 @@ document.getElementById("endereco-box");
 const retiradaBox =
 document.getElementById("retirada-box");
 
-const enderecoInput =
-document.getElementById("endereco");
+const rua =
+document.getElementById("rua");
+
+const numero =
+document.getElementById("numero");
+
+const referencia =
+document.getElementById("referencia");
+
+const bairro =
+document.getElementById("bairro");
 
 const taxaHTML =
 document.getElementById("taxa");
 
-/* BOTÃO ENTREGA */
+/* ENTREGA */
 
 btnEntrega.addEventListener("click",()=>{
 
 tipoEntrega = "entrega";
-
-taxaEntrega = 8;
 
 btnEntrega.classList.add("ativo");
 
@@ -55,14 +60,11 @@ enderecoBox.style.display = "block";
 
 retiradaBox.style.display = "none";
 
-taxaHTML.innerHTML =
-`🚚 Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}`;
-
 atualizarCarrinho();
 
 });
 
-/* BOTÃO RETIRADA */
+/* RETIRADA */
 
 btnRetirada.addEventListener("click",()=>{
 
@@ -79,7 +81,23 @@ enderecoBox.style.display = "none";
 retiradaBox.style.display = "block";
 
 taxaHTML.innerHTML =
-`🚚 Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}`;
+`🚚 Taxa de entrega: R$ 0,00`;
+
+atualizarCarrinho();
+
+});
+
+/* BAIRRO */
+
+bairro.addEventListener("change",()=>{
+
+taxaEntrega =
+Number(bairro.value);
+
+taxaHTML.innerHTML =
+
+`🚚 Taxa de entrega:
+R$ ${taxaEntrega.toFixed(2)}`;
 
 atualizarCarrinho();
 
@@ -148,8 +166,6 @@ carrinhoHTML.innerHTML = "";
 
 let subtotal = 0;
 
-/* VAZIO */
-
 if(carrinho.length === 0){
 
 carrinhoHTML.innerHTML = `
@@ -168,8 +184,6 @@ totalHTML.innerHTML =
 return;
 
 }
-
-/* PRODUTOS */
 
 carrinho.forEach((item,index)=>{
 
@@ -207,8 +221,6 @@ R$ ${totalItem.toFixed(2)}
 
 });
 
-/* TOTAL */
-
 const totalFinal =
 subtotal + taxaEntrega;
 
@@ -217,20 +229,6 @@ totalHTML.innerHTML =
 `
 💰 Total Final:
 R$ ${totalFinal.toFixed(2)}
-`;
-
-/* LIMPAR */
-
-carrinhoHTML.innerHTML += `
-
-<button
-class="limpar-btn"
-onclick="limparCarrinho()">
-
-🗑 Limpar Carrinho
-
-</button>
-
 `;
 
 }
@@ -246,16 +244,18 @@ return;
 
 }
 
-/* ENDEREÇO */
-
 if(
 
 tipoEntrega === "entrega" &&
-enderecoInput.value === ""
+(
+rua.value === "" ||
+numero.value === "" ||
+bairro.value === ""
+)
 
 ){
 
-alert("Digite o endereço!");
+alert("Preencha todos os dados!");
 return;
 
 }
@@ -267,8 +267,6 @@ let mensagem =
 
 mensagem +=
 "🛒 *PEDIDO:* %0A%0A";
-
-/* ITENS */
 
 carrinho.forEach((item)=>{
 
@@ -285,15 +283,22 @@ mensagem +=
 
 });
 
-/* ENTREGA */
-
 if(tipoEntrega === "entrega"){
 
 mensagem +=
 `%0A🚚 *Entrega*`;
 
 mensagem +=
-`%0A📍 ${enderecoInput.value}`;
+`%0A📍 Rua: ${rua.value}`;
+
+mensagem +=
+`%0A🏠 Número: ${numero.value}`;
+
+mensagem +=
+`%0A📌 Referência: ${referencia.value}`;
+
+mensagem +=
+`%0A🏘 Bairro: ${bairro.options[bairro.selectedIndex].text}`;
 
 }else{
 
@@ -304,8 +309,6 @@ mensagem +=
 `%0A📍 Av. Principal, 500 - Centro`;
 
 }
-
-/* TOTAL */
 
 const totalFinal =
 subtotal + taxaEntrega;
@@ -344,3 +347,18 @@ behavior:"smooth"
 });
 
 }
+
+/* LOADING */
+
+window.addEventListener("load",()=>{
+
+const loading =
+document.getElementById("loading");
+
+setTimeout(()=>{
+
+loading.style.display = "none";
+
+},1000);
+
+});
