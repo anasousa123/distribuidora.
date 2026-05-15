@@ -1,4 +1,31 @@
 /* =========================
+LOADING
+========================= */
+
+window.addEventListener("load",()=>{
+
+const loading =
+document.getElementById("loading");
+
+if(loading){
+
+setTimeout(()=>{
+
+loading.style.opacity = "0";
+
+setTimeout(()=>{
+
+loading.style.display = "none";
+
+},500);
+
+},1000);
+
+}
+
+});
+
+/* =========================
 CARRINHO
 ========================= */
 
@@ -13,7 +40,9 @@ document.getElementById("total");
 const finalizar =
 document.getElementById("finalizar");
 
-/* ENTREGA */
+/* =========================
+ENTREGA
+========================= */
 
 let tipoEntrega = "retirada";
 
@@ -46,7 +75,11 @@ document.getElementById("bairro");
 const taxaHTML =
 document.getElementById("taxa");
 
-/* ENTREGA */
+/* =========================
+BOTÃO ENTREGA
+========================= */
+
+if(btnEntrega){
 
 btnEntrega.addEventListener("click",()=>{
 
@@ -64,7 +97,13 @@ atualizarCarrinho();
 
 });
 
-/* RETIRADA */
+}
+
+/* =========================
+BOTÃO RETIRADA
+========================= */
+
+if(btnRetirada){
 
 btnRetirada.addEventListener("click",()=>{
 
@@ -81,13 +120,19 @@ enderecoBox.style.display = "none";
 retiradaBox.style.display = "block";
 
 taxaHTML.innerHTML =
-`🚚 Taxa de entrega: R$ 0,00`;
+"🚚 Taxa de entrega: R$ 0,00";
 
 atualizarCarrinho();
 
 });
 
-/* BAIRRO */
+}
+
+/* =========================
+BAIRRO
+========================= */
+
+if(bairro){
 
 bairro.addEventListener("change",()=>{
 
@@ -103,7 +148,11 @@ atualizarCarrinho();
 
 });
 
-/* ADICIONAR */
+}
+
+/* =========================
+ADICIONAR CARRINHO
+========================= */
 
 window.adicionarCarrinho = function(nome,preco){
 
@@ -130,7 +179,9 @@ atualizarCarrinho();
 
 }
 
-/* REMOVER */
+/* =========================
+REMOVER ITEM
+========================= */
 
 window.removerItem = function(index){
 
@@ -148,19 +199,13 @@ atualizarCarrinho();
 
 }
 
-/* LIMPAR */
-
-window.limparCarrinho = function(){
-
-carrinho = [];
-
-atualizarCarrinho();
-
-}
-
-/* ATUALIZAR */
+/* =========================
+ATUALIZAR CARRINHO
+========================= */
 
 function atualizarCarrinho(){
+
+if(!carrinhoHTML || !totalHTML) return;
 
 carrinhoHTML.innerHTML = "";
 
@@ -233,7 +278,11 @@ R$ ${totalFinal.toFixed(2)}
 
 }
 
-/* FINALIZAR */
+/* =========================
+FINALIZAR PEDIDO
+========================= */
+
+if(finalizar){
 
 finalizar.addEventListener("click",()=>{
 
@@ -255,7 +304,7 @@ bairro.value === ""
 
 ){
 
-alert("Preencha todos os dados!");
+alert("Preencha os dados de entrega!");
 return;
 
 }
@@ -286,7 +335,7 @@ mensagem +=
 if(tipoEntrega === "entrega"){
 
 mensagem +=
-`%0A🚚 *Entrega*`;
+`%0A🚚 *ENTREGA*`;
 
 mensagem +=
 `%0A📍 Rua: ${rua.value}`;
@@ -303,7 +352,7 @@ mensagem +=
 }else{
 
 mensagem +=
-`%0A🏪 *Retirada no local*`;
+`%0A🏪 *RETIRADA NO LOCAL*`;
 
 mensagem +=
 `%0A📍 Av. Principal, 500 - Centro`;
@@ -335,12 +384,20 @@ window.open(
 
 });
 
-/* HERO */
+}
+
+/* =========================
+BOTÃO HERO
+========================= */
 
 window.irParaCardapio = function(){
 
-document.querySelector(".produtos")
-.scrollIntoView({
+const produtos =
+document.querySelector(".produtos");
+
+if(produtos){
+
+produtos.scrollIntoView({
 
 behavior:"smooth"
 
@@ -348,17 +405,10 @@ behavior:"smooth"
 
 }
 
-/* LOADING */
+}
 
-window.addEventListener("load",()=>{
+/* =========================
+INICIAR
+========================= */
 
-const loading =
-document.getElementById("loading");
-
-setTimeout(()=>{
-
-loading.style.display = "none";
-
-},1000);
-
-});
+atualizarCarrinho();
