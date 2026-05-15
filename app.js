@@ -201,3 +201,25 @@ behavior:"smooth"
 }
 
 atualizarCarrinho();
+window.abrirCategoria = function(id){
+
+const categorias =
+document.querySelectorAll(".categoria-box");
+
+categorias.forEach((categoria)=>{
+
+categoria.style.display = "none";
+
+});
+
+document.getElementById(id)
+.style.display = "block";
+
+document.getElementById(id)
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+}
