@@ -2,9 +2,7 @@
 CARRINHO DISTRIBUIDORA PRIME
 ========================= */
 
-let carrinho = JSON.parse(
-localStorage.getItem("carrinho")
-) || [];
+let carrinho = [];
 
 /* ELEMENTOS */
 
@@ -19,8 +17,15 @@ document.getElementById("finalizar");
 
 /* ENTREGA */
 
-const tipoEntrega =
-document.getElementById("tipo-entrega");
+let tipoEntrega = "retirada";
+
+let taxaEntrega = 0;
+
+const btnEntrega =
+document.getElementById("btn-entrega");
+
+const btnRetirada =
+document.getElementById("btn-retirada");
 
 const enderecoBox =
 document.getElementById("endereco-box");
@@ -34,45 +39,51 @@ document.getElementById("endereco");
 const taxaHTML =
 document.getElementById("taxa");
 
-/* TAXA */
+/* BOTÃO ENTREGA */
 
-let taxaEntrega = 0;
+btnEntrega.addEventListener("click",()=>{
 
-/* ALTERAR ENTREGA */
+tipoEntrega = "entrega";
 
-if(tipoEntrega){
+taxaEntrega = 8;
 
-tipoEntrega.addEventListener("change",()=>{
+btnEntrega.classList.add("ativo");
 
-if(tipoEntrega.value === "entrega"){
+btnRetirada.classList.remove("ativo");
 
 enderecoBox.style.display = "block";
 
 retiradaBox.style.display = "none";
 
-taxaEntrega = 8;
-
 taxaHTML.innerHTML =
 `🚚 Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}`;
-
-}else{
-
-enderecoBox.style.display = "none";
-
-retiradaBox.style.display = "block";
-
-taxaEntrega = 0;
-
-taxaHTML.innerHTML =
-`🚚 Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}`;
-
-}
 
 atualizarCarrinho();
 
 });
 
-}
+/* BOTÃO RETIRADA */
+
+btnRetirada.addEventListener("click",()=>{
+
+tipoEntrega = "retirada";
+
+taxaEntrega = 0;
+
+btnRetirada.classList.add("ativo");
+
+btnEntrega.classList.remove("ativo");
+
+enderecoBox.style.display = "none";
+
+retiradaBox.style.display = "block";
+
+taxaHTML.innerHTML =
+`🚚 Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}`;
+
+atualizarCarrinho();
+
+});
 
 /* ADICIONAR */
 
@@ -97,8 +108,6 @@ quantidade:1
 
 }
 
-salvarCarrinho();
-
 atualizarCarrinho();
 
 }
@@ -117,8 +126,6 @@ carrinho.splice(index,1);
 
 }
 
-salvarCarrinho();
-
 atualizarCarrinho();
 
 }
@@ -127,34 +134,9 @@ atualizarCarrinho();
 
 window.limparCarrinho = function(){
 
-const confirmar =
-confirm("Deseja limpar o carrinho?");
-
-if(!confirmar){
-
-return;
-
-}
-
 carrinho = [];
 
-salvarCarrinho();
-
 atualizarCarrinho();
-
-}
-
-/* SALVAR */
-
-function salvarCarrinho(){
-
-localStorage.setItem(
-
-"carrinho",
-
-JSON.stringify(carrinho)
-
-);
 
 }
 
@@ -162,17 +144,11 @@ JSON.stringify(carrinho)
 
 function atualizarCarrinho(){
 
-if(!carrinhoHTML || !totalHTML){
-
-return;
-
-}
-
 carrinhoHTML.innerHTML = "";
 
 let subtotal = 0;
 
-/* CARRINHO VAZIO */
+/* VAZIO */
 
 if(carrinho.length === 0){
 
@@ -193,7 +169,7 @@ return;
 
 }
 
-/* ITENS */
+/* PRODUTOS */
 
 carrinho.forEach((item,index)=>{
 
@@ -261,8 +237,6 @@ onclick="limparCarrinho()">
 
 /* FINALIZAR */
 
-if(finalizar){
-
 finalizar.addEventListener("click",()=>{
 
 if(carrinho.length === 0){
@@ -272,11 +246,11 @@ return;
 
 }
 
-/* ENTREGA */
+/* ENDEREÇO */
 
 if(
 
-tipoEntrega.value === "entrega" &&
+tipoEntrega === "entrega" &&
 enderecoInput.value === ""
 
 ){
@@ -294,7 +268,7 @@ let mensagem =
 mensagem +=
 "🛒 *PEDIDO:* %0A%0A";
 
-/* PRODUTOS */
+/* ITENS */
 
 carrinho.forEach((item)=>{
 
@@ -311,9 +285,9 @@ mensagem +=
 
 });
 
-/* ENTREGA OU RETIRADA */
+/* ENTREGA */
 
-if(tipoEntrega.value === "entrega"){
+if(tipoEntrega === "entrega"){
 
 mensagem +=
 `%0A🚚 *Entrega*`;
@@ -348,11 +322,6 @@ mensagem +=
 
 `%0A💵 *Total Final: R$ ${totalFinal.toFixed(2)}*`;
 
-mensagem +=
-"%0A%0A🚀 Obrigado pela preferência!";
-
-/* WHATSAPP */
-
 window.open(
 
 `https://wa.me/5531999999999?text=${mensagem}`,
@@ -362,8 +331,6 @@ window.open(
 );
 
 });
-
-}
 
 /* HERO */
 
@@ -377,26 +344,3 @@ behavior:"smooth"
 });
 
 }
-
-/* LOADING */
-
-window.addEventListener("load",()=>{
-
-const loading =
-document.getElementById("loading");
-
-if(loading){
-
-setTimeout(()=>{
-
-loading.style.display = "none";
-
-},1200);
-
-}
-
-});
-
-/* INICIAR */
-
-atualizarCarrinho();
