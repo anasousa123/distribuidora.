@@ -1,35 +1,8 @@
-/* =========================
-LOADING
-========================= */
-
-window.addEventListener("load",()=>{
-
-const loading =
-document.getElementById("loading");
-
-if(loading){
-
-setTimeout(()=>{
-
-loading.style.opacity = "0";
-
-setTimeout(()=>{
-
-loading.style.display = "none";
-
-},500);
-
-},1000);
-
-}
-
-});
-
-/* =========================
-CARRINHO
-========================= */
-
 let carrinho = [];
+
+let tipoEntrega = "retirada";
+
+let taxaEntrega = 0;
 
 const carrinhoHTML =
 document.getElementById("carrinho-itens");
@@ -39,14 +12,6 @@ document.getElementById("total");
 
 const finalizar =
 document.getElementById("finalizar");
-
-/* =========================
-ENTREGA
-========================= */
-
-let tipoEntrega = "retirada";
-
-let taxaEntrega = 0;
 
 const btnEntrega =
 document.getElementById("btn-entrega");
@@ -60,26 +25,13 @@ document.getElementById("endereco-box");
 const retiradaBox =
 document.getElementById("retirada-box");
 
-const rua =
-document.getElementById("rua");
-
-const numero =
-document.getElementById("numero");
-
-const referencia =
-document.getElementById("referencia");
-
 const bairro =
 document.getElementById("bairro");
 
 const taxaHTML =
 document.getElementById("taxa");
 
-/* =========================
-BOTÃO ENTREGA
-========================= */
-
-if(btnEntrega){
+/* ENTREGA */
 
 btnEntrega.addEventListener("click",()=>{
 
@@ -93,17 +45,9 @@ enderecoBox.style.display = "block";
 
 retiradaBox.style.display = "none";
 
-atualizarCarrinho();
-
 });
 
-}
-
-/* =========================
-BOTÃO RETIRADA
-========================= */
-
-if(btnRetirada){
+/* RETIRADA */
 
 btnRetirada.addEventListener("click",()=>{
 
@@ -126,13 +70,7 @@ atualizarCarrinho();
 
 });
 
-}
-
-/* =========================
-BAIRRO
-========================= */
-
-if(bairro){
+/* TAXA */
 
 bairro.addEventListener("change",()=>{
 
@@ -148,11 +86,7 @@ atualizarCarrinho();
 
 });
 
-}
-
-/* =========================
-ADICIONAR CARRINHO
-========================= */
+/* ADICIONAR */
 
 window.adicionarCarrinho = function(nome,preco){
 
@@ -179,9 +113,7 @@ atualizarCarrinho();
 
 }
 
-/* =========================
-REMOVER ITEM
-========================= */
+/* REMOVER */
 
 window.removerItem = function(index){
 
@@ -199,13 +131,9 @@ atualizarCarrinho();
 
 }
 
-/* =========================
-ATUALIZAR CARRINHO
-========================= */
+/* ATUALIZAR */
 
 function atualizarCarrinho(){
-
-if(!carrinhoHTML || !totalHTML) return;
 
 carrinhoHTML.innerHTML = "";
 
@@ -278,33 +206,13 @@ R$ ${totalFinal.toFixed(2)}
 
 }
 
-/* =========================
-FINALIZAR PEDIDO
-========================= */
-
-if(finalizar){
+/* FINALIZAR */
 
 finalizar.addEventListener("click",()=>{
 
 if(carrinho.length === 0){
 
 alert("Carrinho vazio!");
-return;
-
-}
-
-if(
-
-tipoEntrega === "entrega" &&
-(
-rua.value === "" ||
-numero.value === "" ||
-bairro.value === ""
-)
-
-){
-
-alert("Preencha os dados de entrega!");
 return;
 
 }
@@ -332,47 +240,12 @@ mensagem +=
 
 });
 
-if(tipoEntrega === "entrega"){
-
-mensagem +=
-`%0A🚚 *ENTREGA*`;
-
-mensagem +=
-`%0A📍 Rua: ${rua.value}`;
-
-mensagem +=
-`%0A🏠 Número: ${numero.value}`;
-
-mensagem +=
-`%0A📌 Referência: ${referencia.value}`;
-
-mensagem +=
-`%0A🏘 Bairro: ${bairro.options[bairro.selectedIndex].text}`;
-
-}else{
-
-mensagem +=
-`%0A🏪 *RETIRADA NO LOCAL*`;
-
-mensagem +=
-`%0A📍 Av. Principal, 500 - Centro`;
-
-}
-
 const totalFinal =
 subtotal + taxaEntrega;
 
 mensagem +=
 
-`%0A%0A💰 *Subtotal: R$ ${subtotal.toFixed(2)}*`;
-
-mensagem +=
-
-`%0A🚚 *Taxa: R$ ${taxaEntrega.toFixed(2)}*`;
-
-mensagem +=
-
-`%0A💵 *Total Final: R$ ${totalFinal.toFixed(2)}*`;
+`%0A💰 *Total Final: R$ ${totalFinal.toFixed(2)}*`;
 
 window.open(
 
@@ -384,31 +257,17 @@ window.open(
 
 });
 
-}
-
-/* =========================
-BOTÃO HERO
-========================= */
+/* HERO */
 
 window.irParaCardapio = function(){
 
-const produtos =
-document.querySelector(".produtos");
-
-if(produtos){
-
-produtos.scrollIntoView({
+document.querySelector(".produtos")
+.scrollIntoView({
 
 behavior:"smooth"
 
 });
 
 }
-
-}
-
-/* =========================
-INICIAR
-========================= */
 
 atualizarCarrinho();

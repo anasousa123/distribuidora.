@@ -15,58 +15,6 @@ color:white;
 overflow-x:hidden;
 }
 
-/* LOADING */
-
-#loading{
-
-position:fixed;
-top:0;
-left:0;
-
-width:100%;
-height:100vh;
-
-background:#000;
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-
-z-index:99999;
-
-}
-
-.loader{
-
-width:80px;
-height:80px;
-
-border:8px solid #222;
-border-top:8px solid #ffb700;
-
-border-radius:50%;
-
-animation:girar 1s linear infinite;
-
-}
-
-@keyframes girar{
-
-100%{
-transform:rotate(360deg);
-}
-
-}
-
-#loading h2{
-
-margin-top:20px;
-font-size:32px;
-color:#ffb700;
-
-}
-
 /* HEADER */
 
 .header{
@@ -252,21 +200,11 @@ box-shadow:0 0 25px rgba(37,211,102,0.5);
 
 transition:0.3s;
 
-animation:flutuar 2s infinite;
-
 }
 
 .whatsapp:hover{
 
 transform:scale(1.1);
-
-}
-
-@keyframes flutuar{
-
-50%{
-transform:translateY(-8px);
-}
 
 }
 
@@ -574,12 +512,6 @@ transition:0.3s;
 
 }
 
-.opcao:hover{
-
-transform:translateY(-3px);
-
-}
-
 .opcao.ativo{
 
 background:#ffb700;
@@ -699,32 +631,6 @@ footer h3{
 color:#ffb700;
 
 margin-bottom:15px;
-
-}
-
-/* ANIMAÇÃO */
-
-.fade-up{
-
-animation:fadeUp 1s ease;
-
-}
-
-@keyframes fadeUp{
-
-from{
-
-opacity:0;
-transform:translateY(40px);
-
-}
-
-to{
-
-opacity:1;
-transform:translateY(0);
-
-}
 
 }
 
