@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
@@ -8,7 +8,7 @@
 
 <title>Distribuidora Prime</title>
 
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -45,7 +45,7 @@ target="_blank">
 
 <div class="logo">
 
-🍺 PRIME
+🍺 DISTRIBUIDORA PRIME
 
 </div>
 
@@ -85,7 +85,7 @@ AS MELHORES <br>
 
 <p>
 
-Entrega rápida e bebidas sempre geladas.
+Entrega rápida e bebidas geladas na sua casa.
 
 </p>
 
@@ -104,23 +104,33 @@ FAÇA SEU PEDIDO
 <section class="categorias">
 
 <div class="categoria">
+
 🍺 Cervejas
+
 </div>
 
 <div class="categoria">
+
 🥃 Whiskys
+
 </div>
 
 <div class="categoria">
+
 🍹 Drinks
+
 </div>
 
 <div class="categoria">
-🔥 Combos
-</div>
 
-<div class="categoria">
 ⚡ Energéticos
+
+</div>
+
+<div class="categoria">
+
+🔥 Combos
+
 </div>
 
 </section>
@@ -141,13 +151,13 @@ FAÇA SEU PEDIDO
 
 <div class="grid-produtos">
 
-<!-- PRODUTO 1 -->
+<!-- PRODUTO -->
 
 <div class="card fade-up">
 
 <div class="tag">
 
-PROMO
+TOP
 
 </div>
 
@@ -173,13 +183,13 @@ Adicionar
 
 </div>
 
-<!-- PRODUTO 2 -->
+<!-- PRODUTO -->
 
 <div class="card fade-up">
 
 <div class="tag">
 
-PROMO
+OFERTA
 
 </div>
 
@@ -205,13 +215,13 @@ Adicionar
 
 </div>
 
-<!-- PRODUTO 3 -->
+<!-- PRODUTO -->
 
 <div class="card fade-up">
 
 <div class="tag">
 
-TOP
+🔥 HOT
 
 </div>
 
@@ -237,7 +247,7 @@ Adicionar
 
 </div>
 
-<!-- PRODUTO 4 -->
+<!-- PRODUTO -->
 
 <div class="card fade-up">
 
@@ -295,31 +305,81 @@ Seu carrinho está vazio 🛒
 
 </div>
 
-<h3 id="total">
+<!-- ENTREGA -->
 
-Total: R$ 0,00
+<div class="tipo-pedido">
+
+<h3>
+
+🚚 Tipo do Pedido
 
 </h3>
+
+<select id="tipo-entrega">
+
+<option value="retirada">
+
+Retirada no Local
+
+</option>
+
+<option value="entrega">
+
+Entrega
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ENDEREÇO -->
+
+<div
+id="endereco-box"
+style="display:none;">
+
+<input
+type="text"
+id="endereco"
+placeholder="Digite seu endereço">
+
+</div>
+
+<!-- RETIRADA -->
+
+<div
+id="retirada-box"
+class="retirada-box">
+
+📍 Retirada:
+Av. Principal, 500 - Centro
+
+</div>
+
+<!-- TAXA -->
+
+<h3 id="taxa">
+
+🚚 Taxa de entrega: R$ 0,00
+
+</h3>
+
+<!-- TOTAL -->
+
+<h3 id="total">
+
+💰 Total: R$ 0,00
+
+</h3>
+
+<!-- FINALIZAR -->
 
 <button id="finalizar" class="finalizar">
 
 FINALIZAR PEDIDO
 
 </button>
-
-<!-- PIX -->
-
-<div class="pix-box">
-
-<h3>💳 Pix</h3>
-
-<img
-src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=PIX"
-class="pix-qrcode">
-
-<p>Chave Pix: 31999999999</p>
-
-</div>
 
 </div>
 
@@ -331,7 +391,7 @@ class="pix-qrcode">
 
 <h2>
 
-📍 Área de Entrega
+📍 Nossa Localização
 
 </h2>
 
@@ -340,8 +400,37 @@ src="https://www.google.com/maps/embed?pb=!1m18"
 width="100%"
 height="350"
 style="border:0;border-radius:20px;"
+allowfullscreen=""
 loading="lazy">
+
 </iframe>
+
+</section>
+
+<!-- PIX -->
+
+<section class="produtos">
+
+<div class="pix-box">
+
+<h3>
+
+💳 PAGAMENTO VIA PIX
+
+</h3>
+
+<img
+class="pix-qrcode"
+src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=PIX">
+
+<p>
+
+Chave Pix:
+contato@distribuidora.com
+
+</p>
+
+</div>
 
 </section>
 

@@ -1,3 +1,7 @@
+/* =========================
+CARRINHO DISTRIBUIDORA PRIME
+========================= */
+
 let carrinho = JSON.parse(
 localStorage.getItem("carrinho")
 ) || [];
@@ -12,6 +16,63 @@ document.getElementById("total");
 
 const finalizar =
 document.getElementById("finalizar");
+
+/* ENTREGA */
+
+const tipoEntrega =
+document.getElementById("tipo-entrega");
+
+const enderecoBox =
+document.getElementById("endereco-box");
+
+const retiradaBox =
+document.getElementById("retirada-box");
+
+const enderecoInput =
+document.getElementById("endereco");
+
+const taxaHTML =
+document.getElementById("taxa");
+
+/* TAXA */
+
+let taxaEntrega = 0;
+
+/* ALTERAR ENTREGA */
+
+if(tipoEntrega){
+
+tipoEntrega.addEventListener("change",()=>{
+
+if(tipoEntrega.value === "entrega"){
+
+enderecoBox.style.display = "block";
+
+retiradaBox.style.display = "none";
+
+taxaEntrega = 8;
+
+taxaHTML.innerHTML =
+`🚚 Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}`;
+
+}else{
+
+enderecoBox.style.display = "none";
+
+retiradaBox.style.display = "block";
+
+taxaEntrega = 0;
+
+taxaHTML.innerHTML =
+`🚚 Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}`;
+
+}
+
+atualizarCarrinho();
+
+});
+
+}
 
 /* ADICIONAR */
 
@@ -35,14 +96,6 @@ quantidade:1
 });
 
 }
-
-/* SOM */
-
-const audio = new Audio(
-"https://www.soundjay.com/buttons/sounds/button-3.mp3"
-);
-
-audio.play();
 
 salvarCarrinho();
 
@@ -109,9 +162,15 @@ JSON.stringify(carrinho)
 
 function atualizarCarrinho(){
 
+if(!carrinhoHTML || !totalHTML){
+
+return;
+
+}
+
 carrinhoHTML.innerHTML = "";
 
-let total = 0;
+let subtotal = 0;
 
 /* VAZIO */
 
@@ -128,7 +187,7 @@ Seu carrinho está vazio 🛒
 `;
 
 totalHTML.innerHTML =
-"Total: R$ 0,00";
+"💰 Total: R$ 0,00";
 
 return;
 
@@ -138,14 +197,14 @@ return;
 
 carrinho.forEach((item,index)=>{
 
-const subtotal =
+const totalItem =
 item.preco * item.quantidade;
 
-total += subtotal;
+subtotal += totalItem;
 
 carrinhoHTML.innerHTML += `
 
-<div class="item-carrinho fade-up">
+<div class="item-carrinho">
 
 <div>
 
@@ -154,23 +213,17 @@ carrinhoHTML.innerHTML += `
 <p>
 
 ${item.quantidade}x •
-R$ ${subtotal.toFixed(2)}
+R$ ${totalItem.toFixed(2)}
 
 </p>
 
 </div>
 
-<div class="acoes">
+<button onclick="removerItem(${index})">
 
-<button
-class="menos"
-onclick="removerItem(${index})">
-
-➖
+❌
 
 </button>
-
-</div>
 
 </div>
 
@@ -180,9 +233,15 @@ onclick="removerItem(${index})">
 
 /* TOTAL */
 
+const totalFinal =
+subtotal + taxaEntrega;
+
 totalHTML.innerHTML =
 
-`💰 Total: R$ ${total.toFixed(2)}`;
+`
+💰 Total Final:
+R$ ${totalFinal.toFixed(2)}
+`;
 
 /* BOTÃO LIMPAR */
 
@@ -202,6 +261,8 @@ onclick="limparCarrinho()">
 
 /* FINALIZAR */
 
+if(finalizar){
+
 finalizar.addEventListener("click",()=>{
 
 if(carrinho.length === 0){
@@ -211,10 +272,21 @@ return;
 
 }
 
-finalizar.innerHTML =
-"Enviando...";
+/* ENTREGA */
 
-let total = 0;
+if(
+
+tipoEntrega.value === "entrega" &&
+enderecoInput.value === ""
+
+){
+
+alert("Digite o endereço!");
+return;
+
+}
+
+let subtotal = 0;
 
 let mensagem =
 "🍺 *DISTRIBUIDORA PRIME* %0A%0A";
@@ -222,23 +294,59 @@ let mensagem =
 mensagem +=
 "🛒 *PEDIDO:* %0A%0A";
 
+/* ITENS */
+
 carrinho.forEach((item)=>{
 
-const subtotal =
+const totalItem =
 item.preco * item.quantidade;
 
-total += subtotal;
+subtotal += totalItem;
 
 mensagem +=
 
-`• ${item.nome} (${item.quantidade}x)
-- R$ ${subtotal.toFixed(2)}%0A`;
+`• ${item.nome}
+(${item.quantidade}x)
+- R$ ${totalItem.toFixed(2)}%0A`;
 
 });
 
+/* ENTREGA */
+
+if(tipoEntrega.value === "entrega"){
+
+mensagem +=
+`%0A🚚 *Entrega*`;
+
+mensagem +=
+`%0A📍 ${enderecoInput.value}`;
+
+}else{
+
+mensagem +=
+`%0A🏪 *Retirada no local*`;
+
+mensagem +=
+`%0A📍 Av. Principal, 500 - Centro`;
+
+}
+
+/* TOTAL */
+
+const totalFinal =
+subtotal + taxaEntrega;
+
 mensagem +=
 
-`%0A💰 *Total: R$ ${total.toFixed(2)}*`;
+`%0A%0A💰 *Subtotal: R$ ${subtotal.toFixed(2)}*`;
+
+mensagem +=
+
+`%0A🚚 *Taxa: R$ ${taxaEntrega.toFixed(2)}*`;
+
+mensagem +=
+
+`%0A💵 *Total Final: R$ ${totalFinal.toFixed(2)}*`;
 
 mensagem +=
 "%0A%0A🚀 Obrigado pela preferência!";
@@ -252,15 +360,6 @@ window.open(
 "_blank"
 
 );
-
-/* RESET */
-
-setTimeout(()=>{
-
-finalizar.innerHTML =
-"FINALIZAR PEDIDO";
-
-},1500);
 
 });
 
@@ -284,15 +383,11 @@ window.addEventListener("load",()=>{
 const loading =
 document.getElementById("loading");
 
-if(loading){
-
 setTimeout(()=>{
 
 loading.style.display = "none";
 
 },1200);
-
-}
 
 });
 
