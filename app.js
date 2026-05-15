@@ -172,7 +172,7 @@ carrinhoHTML.innerHTML = "";
 
 let subtotal = 0;
 
-/* VAZIO */
+/* CARRINHO VAZIO */
 
 if(carrinho.length === 0){
 
@@ -243,7 +243,7 @@ totalHTML.innerHTML =
 R$ ${totalFinal.toFixed(2)}
 `;
 
-/* BOTÃO LIMPAR */
+/* LIMPAR */
 
 carrinhoHTML.innerHTML += `
 
@@ -294,7 +294,7 @@ let mensagem =
 mensagem +=
 "🛒 *PEDIDO:* %0A%0A";
 
-/* ITENS */
+/* PRODUTOS */
 
 carrinho.forEach((item)=>{
 
@@ -311,7 +311,7 @@ mensagem +=
 
 });
 
-/* ENTREGA */
+/* ENTREGA OU RETIRADA */
 
 if(tipoEntrega.value === "entrega"){
 
@@ -363,6 +363,8 @@ window.open(
 
 });
 
+}
+
 /* HERO */
 
 window.irParaCardapio = function(){
@@ -383,11 +385,15 @@ window.addEventListener("load",()=>{
 const loading =
 document.getElementById("loading");
 
+if(loading){
+
 setTimeout(()=>{
 
 loading.style.display = "none";
 
 },1200);
+
+}
 
 });
 
