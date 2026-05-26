@@ -1,12 +1,11 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+```javascript id="l8v2mz"
+import { initializeApp }
 
-import {
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-getFirestore
+import { getFirestore }
 
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-/* CONFIG FIREBASE */
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
 
@@ -24,14 +23,9 @@ appId: "SEU_APP_ID"
 
 };
 
-/* INICIAR FIREBASE */
-
 const app = initializeApp(firebaseConfig);
-
-/* BANCO */
 
 const db = getFirestore(app);
 
-/* EXPORTAR */
-
 export { db };
+```
